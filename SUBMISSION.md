@@ -27,7 +27,7 @@ When we digitized those tapes last month, we found twenty-six hours of crackling
 
 ## Demo
 
-- **Interactive Kitchen Studio:** [Experience Heirloom Live](https://vamshavardhan50.github.io/heirloom-grandpa-recipes/) *(or run locally via `index.html`)*
+- **Live Deployed App (GitHub Pages):** 👉 **[https://vamshavardhan50.github.io/heirloom-grandpa-recipes/](https://vamshavardhan50.github.io/heirloom-grandpa-recipes/)**
 - **GitHub Repository:** [Vamshavardhan50/heirloom-grandpa-recipes](https://github.com/Vamshavardhan50/heirloom-grandpa-recipes)
 
 ### The Interactive Experience:

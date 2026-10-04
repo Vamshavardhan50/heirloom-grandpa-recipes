@@ -222,6 +222,118 @@ h1, h2, h3, h4, .font-serif {
   transform: translateY(-1.5px);
 }
 
+/* Grand Challenge Hero Banner */
+.challenge-hero-banner {
+  background: linear-gradient(180deg, rgba(32, 26, 22, 0.95) 0%, rgba(23, 20, 18, 0.98) 100%);
+  border-bottom: 1px solid var(--copper-border);
+  padding: 3rem 1.5rem 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.challenge-hero-banner::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 5%;
+  width: 320px;
+  height: 100%;
+  background: radial-gradient(circle, rgba(226, 168, 80, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-content-container {
+  max-width: 1360px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.challenge-badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.badge-tag {
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  letter-spacing: 0.03em;
+  display: inline-flex;
+  align-items: center;
+}
+
+.badge-tag.gold {
+  background: rgba(226, 168, 80, 0.15);
+  color: var(--warm-gold);
+  border: 1px solid rgba(226, 168, 80, 0.35);
+}
+
+.badge-tag.green {
+  background: rgba(80, 200, 120, 0.12);
+  color: #72d698;
+  border: 1px solid rgba(80, 200, 120, 0.3);
+}
+
+.badge-tag.outline {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-muted);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.hero-headline {
+  font-size: 2.35rem;
+  line-height: 1.2;
+  color: #fff;
+  max-width: 900px;
+  letter-spacing: -0.02em;
+}
+
+.hero-subtext {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  max-width: 880px;
+  line-height: 1.65;
+}
+
+.hero-subtext strong {
+  color: var(--warm-gold);
+}
+
+.hero-stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+  max-width: 900px;
+}
+
+.hero-stat-item {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--copper-border);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1.15rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-stat-item strong {
+  font-size: 1.3rem;
+  color: var(--warm-gold);
+  font-family: var(--font-serif);
+}
+
+.hero-stat-item span {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
 /* Layout Grid */
 .main-wrapper {
   max-width: 1360px;
