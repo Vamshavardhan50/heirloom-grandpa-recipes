@@ -234,11 +234,13 @@ function setupEventListeners() {
     });
   }
 
-  // Live Microphone Speech Recognition + MediaRecorder
+  // Dual Live Microphone Recording: Real Audio MediaRecorder + Live Text Transcription
   const micBtn = document.getElementById('micRecordBtn');
   const micStatus = document.getElementById('micStatusText');
   const transcriptArea = document.getElementById('rawTranscript');
+  const player = document.getElementById('mainAudioPlayer');
 
+  let mediaStream = null;
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   let recognition = null;
 
@@ -247,13 +249,6 @@ function setupEventListeners() {
     recognition.continuous = true;
     recognition.interimResults = true;
     recognition.lang = 'en-US';
-
-    recognition.onstart = () => {
-      isRecording = true;
-      micBtn.classList.add('recording');
-      micStatus.textContent = "Listening to Grandpa... (Speak your recipe now!)";
-      playAcousticFeedback('click');
-    };
 
     recognition.onresult = (event) => {
       let liveText = '';
@@ -265,65 +260,87 @@ function setupEventListeners() {
 
     recognition.onerror = (event) => {
       console.warn("Speech recognition notice:", event.error);
-      if (event.error === 'not-allowed') {
-        micStatus.textContent = "Microphone blocked. Please grant mic permission in your browser.";
-      }
-    };
-
-    recognition.onend = () => {
-      isRecording = false;
-      micBtn.classList.remove('recording');
-      micStatus.textContent = "Voice captured! Click 'Transform Into Recipe' below.";
-      playAcousticFeedback('success');
     };
   }
 
   if (micBtn) {
     micBtn.addEventListener('click', async () => {
       if (!isRecording) {
-        if (recognition) {
-          try {
-            transcriptArea.value = '';
-            recognition.start();
-          } catch (e) {
-            simulateMicRecording();
+        try {
+          mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          mediaRecorder = new MediaRecorder(mediaStream);
+          audioChunks = [];
+
+          mediaRecorder.ondataavailable = (e) => {
+            if (e.data.size > 0) audioChunks.push(e.data);
+          };
+
+          mediaRecorder.onstop = () => {
+            const audioBlob = new Blob(audioChunks, { type: 'audio/webm;codecs=opus' });
+            const audioUrl = URL.createObjectURL(audioBlob);
+            if (player) {
+              player.src = audioUrl;
+              player.style.display = 'block';
+              player.load();
+            }
+            if (mediaStream) {
+              mediaStream.getTracks().forEach(track => track.stop());
+            }
+          };
+
+          mediaRecorder.start();
+          if (recognition) {
+            try {
+              transcriptArea.value = '';
+              recognition.start();
+            } catch (err) {
+              console.warn(err);
+            }
           }
-        } else {
+
+          isRecording = true;
+          micBtn.classList.add('recording');
+          micStatus.textContent = "🔴 Recording Grandpa live! Speak now, then tap mic to finish.";
+          playAcousticFeedback('click');
+        } catch (err) {
+          console.warn("Microphone access error, falling back:", err);
           simulateMicRecording();
         }
       } else {
+        // Stop recording
+        isRecording = false;
+        micBtn.classList.remove('recording');
+        micStatus.textContent = "✅ Voice recorded & transcribed! Play audio below or click 'Transform Into Recipe'.";
+        playAcousticFeedback('success');
+
+        if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+          mediaRecorder.stop();
+        }
         if (recognition) {
-          recognition.stop();
-        } else {
-          isRecording = false;
-          micBtn.classList.remove('recording');
-          micStatus.textContent = "Voice captured!";
-          playAcousticFeedback('success');
+          try {
+            recognition.stop();
+          } catch (e) {}
         }
       }
     });
   }
 
-  // Simulated Mic Recording fallback
+  // Fallback demo recording if no microphone hardware or permission
   function simulateMicRecording() {
     isRecording = true;
     micBtn.classList.add('recording');
-    micStatus.textContent = "Recording grandpa's kitchen story... (Click to stop)";
+    micStatus.textContent = "Simulating Grandpa's voice memo... (Tap mic to finish)";
     playAcousticFeedback('click');
     
-    micBtn.onclick = () => {
-      isRecording = false;
-      micBtn.classList.remove('recording');
-      micStatus.textContent = "Transcribing with open Whisper weights...";
-      playAcousticFeedback('success');
-      setTimeout(() => {
-        document.getElementById('rawTranscript').value = 
-          "Now don't you forget, when you make the blackberry cobbler, you toss two handfuls of fresh picked berries with a spoon of lemon juice and a generous cup of sugar. Cover it with biscuit dough rolled out thick, and bake it until the purple juice boils over the rim.";
-        document.getElementById('extractBtn').click();
-        micStatus.textContent = "Voice memo captured!";
-        setupEventListeners(); // reset listener
-      }, 1000);
-    };
+    setTimeout(() => {
+      if (isRecording) {
+        transcriptArea.value = "Now Jimmy, you take about two generous fistfuls of flour, brown it in bacon fat with two coarse chopped onions, and stir in three heaping spoonfuls of sweet Hungarian paprika off the heat. Pour a good glug of red wine and simmer on low for two hours until it melts in your mouth.";
+        isRecording = false;
+        micBtn.classList.remove('recording');
+        micStatus.textContent = "✅ Sample tape captured! Click 'Transform Into Recipe' below.";
+        playAcousticFeedback('success');
+      }
+    }, 4000);
   }
 
   // Audio File Upload Dropzone
