@@ -1,0 +1,113 @@
+[
+  {
+    "id": "sample-goulash",
+    "title": "Grandpa Joe's Sunday Cabin Beef Goulash",
+    "duration": "1:42",
+    "speaker": "Grandpa Joe (recorded Oct 1998)",
+    "raw_audio_transcript": "Alright... is this little red light blinking? Okay, turn down the radio, Jimmy. Listen close, because I won't say this twice. If you want the Sunday beef goulash to taste the way it did at the hunting cabin, you don't touch any of that canned broth rubbish. First, you take three pounds of chuck roast. Cut it into big, hearty cubes—don't be stingy. Brown it in bacon fat. That's the real trick. Don't use vegetable oil, Jimmy, use real hickory bacon drippings from breakfast, about two big spoonfuls. Once it's got that nice dark crust, toss in two yellow onions you chopped up coarse. Then comes the secret: three generous tablespoons of sweet Hungarian paprika. You take the pot off the flame before you stir the paprika in, or else it burns and turns bitter like an old mule. Throw in two bay leaves, a good glug—maybe half a cup—of dry red wine, and let it simmer with a lid on the cast iron for at least two hours until the meat surrenders when you poke it with a fork. Serve it over egg noodles with a dollop of sour cream. And don't you dare forget to leave a bowl for your mother.",
+    "story": "Grandpa recorded this on a handheld micro-cassette tape in the kitchen of the old timber cabin in northern Michigan. You can hear the wooden floorboards creaking and the Detroit Tigers game faint in the background.",
+    "metadata": {
+      "prepTime": "25 mins",
+      "cookTime": "2 hrs 15 mins",
+      "servings": "6 hungry people",
+      "heirloomYear": "1974 Cabin Tradition"
+    },
+    "ingredients": [
+      { "item": "Beef chuck roast, trimmed and cut into 1.5-inch cubes", "amount": "3 lbs", "folk": "big hearty cubes, don't be stingy" },
+      { "item": "Smoked bacon fat / drippings", "amount": "2 tbsp", "folk": "two big spoonfuls of breakfast hickory drippings" },
+      { "item": "Yellow onions, coarsely chopped", "amount": "2 large", "folk": "chopped coarse, don't fuss over dice" },
+      { "item": "Sweet Hungarian Paprika (genuine imported)", "amount": "3 tbsp", "folk": "three generous spoonfuls" },
+      { "item": "Dry red table wine (or dark beer)", "amount": "1/2 cup", "folk": "a good honest glug" },
+      { "item": "Dried bay leaves", "amount": "2 leaves", "folk": "two leaves from the pantry jar" },
+      { "item": "Beef stock or water (just enough to cover)", "amount": "1.5 cups", "folk": "just enough to keep it bubbling low" },
+      { "item": "Kosher salt and coarse black pepper", "amount": "To taste", "folk": "pinch until your fingers smell like pepper" },
+      { "item": "Wide egg noodles & sour cream for serving", "amount": "1 package", "folk": "plenty of buttery noodles" }
+    ],
+    "instructions": [
+      {
+        "step": 1,
+        "title": "Render the Bacon Drippings & Sear",
+        "detail": "Melt the bacon fat in a heavy Dutch oven over medium-high heat. Season the beef cubes generously with salt and pepper, then sear in batches until deeply browned on all sides. Remove the beef and set aside.",
+        "grandpaQuote": "Don't use vegetable oil, Jimmy, use real hickory bacon drippings from breakfast."
+      },
+      {
+        "step": 2,
+        "title": "Sweat the Onions",
+        "detail": "Toss the coarsely chopped onions directly into the hot beef and bacon pan juices. Cook for 6-8 minutes until golden-brown and sweet, scraping up the browned fond from the bottom.",
+        "grandpaQuote": "Toss in two yellow onions you chopped coarse."
+      },
+      {
+        "step": 3,
+        "title": "The Paprika Rule (Off the Heat!)",
+        "detail": "Pull the pot off the burner completely. Add the sweet Hungarian paprika and stir quickly into the hot onions and oil. Residual heat blooms the spice without scorching it.",
+        "grandpaQuote": "Take the pot off the flame before you stir the paprika in, or else it burns and turns bitter like an old mule."
+      },
+      {
+        "step": 4,
+        "title": "Deglaze and Slow Simmer",
+        "detail": "Pour in the dry red wine and return to low heat. Add the seared beef back in with its resting juices, toss in bay leaves, and add stock. Cover tightly with the lid and simmer on lowest heat for 2 to 2.5 hours.",
+        "grandpaQuote": "Let it simmer with a lid on the cast iron for at least two hours until the meat surrenders."
+      },
+      {
+        "step": 5,
+        "title": "Rest and Plate",
+        "detail": "Discard bay leaves. Check seasoning. Let rest 10 minutes off heat. Ladle over hot buttered egg noodles and crown with a cool dollop of sour cream.",
+        "grandpaQuote": "Serve it over egg noodles with a dollop of sour cream. And don't you dare forget to leave a bowl for your mother."
+      }
+    ],
+    "grandpaSecret": "Never bloom paprika over direct flame. Paprika contains natural sugars that scorch in seconds, turning brown and bitter. Taking the pot off the fire keeps it vibrant ruby red and sweet.",
+    "tags": ["Comfort Food", "Sunday Dinner", "Cast Iron", "Beef"]
+  },
+  {
+    "id": "sample-apple-crisp",
+    "title": "Gramps Walter's Cast-Iron Skillet Apple Crisp",
+    "duration": "1:15",
+    "speaker": "Gramps Walter (recorded Thanksgiving 2004)",
+    "raw_audio_transcript": "Can someone pass me my glasses? Look here, sweetie. You see all these bruised apples from the backyard tree? Folks throw them out, which is a sin. Peel about six or seven of 'em, slice 'em thin like half-dollars. Now, don't touch white sugar for the topping—that's what bakery stores do to save a dime. You take a whole stick of cold salted butter, cut it into little pebbles with a cup of rolled oats and a cup of dark brown sugar. Pack it in with your knuckles. Now for the kicker: a pinch of cardamom and a whole teaspoon of cinnamon. Spread the apples in the buttered iron skillet, pack the oat crumble thick over the top like fresh winter snow, and bake it at 375 until the apple juices bubble up caramelized around the edge. If you eat it without vanilla bean ice cream, I don't know who raised you.",
+    "story": "Recorded while sitting around the wood stove right after picking bushels of heirloom Honeycrisps and Northern Spies behind the old barn.",
+    "metadata": {
+      "prepTime": "15 mins",
+      "cookTime": "40 mins",
+      "servings": "8 slices",
+      "heirloomYear": "Orchard Harvest Classic"
+    },
+    "ingredients": [
+      { "item": "Tart baking apples (Honeycrisp, Granny Smith, or Northern Spy), peeled & sliced", "amount": "6-7 medium", "folk": "peeled and sliced thin like half-dollars" },
+      { "item": "Cold salted butter, cubed", "amount": "1 stick (1/2 cup)", "folk": "cut into little cold pebbles" },
+      { "item": "Old-fashioned rolled oats", "amount": "1 cup", "folk": "a generous coffee mug of oats" },
+      { "item": "Dark brown sugar, packed", "amount": "1 cup", "folk": "pack it down with your knuckles" },
+      { "item": "Ground Ceylon cinnamon", "amount": "1 tsp", "folk": "one good teaspoon" },
+      { "item": "Ground cardamom", "amount": "1/4 tsp", "folk": "the kicker: a little pinch of cardamom" },
+      { "item": "Fresh lemon juice", "amount": "1 tbsp", "folk": "squeeze of half a fresh lemon" },
+      { "item": "Vanilla bean ice cream", "amount": "For serving", "folk": "mandatory scoop" }
+    ],
+    "instructions": [
+      {
+        "step": 1,
+        "title": "Prep the Apples in Buttered Cast Iron",
+        "detail": "Preheat oven to 375°F (190°C). Grease a 10-inch cast iron skillet with butter. Toss the sliced apples with lemon juice and a sprinkle of cinnamon directly in the skillet.",
+        "grandpaQuote": "Spread the apples in the buttered iron skillet."
+      },
+      {
+        "step": 2,
+        "title": "Cut the Oat Crumble",
+        "detail": "In a mixing bowl, combine the rolled oats, dark brown sugar, cinnamon, cardamom, and cold butter cubes. Use your fingers or pastry cutter to rub until pea-sized crumbles form.",
+        "grandpaQuote": "Pack it in with your knuckles like fresh winter snow."
+      },
+      {
+        "step": 3,
+        "title": "Bake Until Jammy & Bubbling",
+        "detail": "Scatter crumble evenly over the apples. Bake 35-42 minutes until topping is crisp golden and juices are bubbling thick at the perimeter.",
+        "grandpaQuote": "Bake it at 375 until the apple juices bubble up caramelized around the edge."
+      },
+      {
+        "step": 4,
+        "title": "Serve Warm with Ice Cream",
+        "detail": "Let rest 5 minutes. Spoon warm directly from the skillet into bowls and top immediately with rich vanilla ice cream.",
+        "grandpaQuote": "If you eat it without vanilla bean ice cream, I don't know who raised you."
+      }
+    ],
+    "grandpaSecret": "Cardamom paired with cold salted butter. It cuts through the syrupy sweetness of the apples and gives that unforgettable, old-world Scandinavian warmth that modern store pies lack.",
+    "tags": ["Dessert", "Autumn", "Cast Iron", "Apples"]
+  }
+]

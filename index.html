@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heirloom — Grandpa's Voice-to-Recipe Kitchen Companion</title>
+  <meta name="description" content="Turn crackly family voice memos, memories, and folk measurements into a vintage printable family cookbook with offline open-source AI.">
+  
+  <!-- Modern & Vintage Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top App Navigation -->
+  <header class="header-banner">
+    <div class="nav-container">
+      <div class="brand-wrapper">
+        <div class="brand-badge">📻</div>
+        <div class="brand-text">
+          <h1>Heirloom <span class="version-tag">Open AI Edition</span></h1>
+          <p>Preserving family recipes from voice memos & memories</p>
+        </div>
+      </div>
+
+      <div class="nav-actions">
+        <div class="pill-badge">
+          <span class="indicator"></span>
+          <span>100% Offline & Private AI</span>
+        </div>
+        <button id="printBookBtn" class="btn btn-secondary">
+          <span>🖨️</span> Print Heirloom Book
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Application Grid -->
+  <main class="main-wrapper">
+    
+    <!-- Left Column: Audio Studio & Open AI Processing -->
+    <aside class="studio-panel">
+      
+      <div class="panel-title">
+        <h2>Kitchen Studio</h2>
+        <span class="handwritten">whisper.cpp & Llama 3</span>
+      </div>
+
+      <!-- Presets & Sample Audio -->
+      <div>
+        <div class="section-label">1. Choose a Vintage Family Tape or Record</div>
+        <div class="sample-shelf">
+          <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.35rem;">Grandpa's Archival Memos:</div>
+          <div class="sample-buttons" id="sampleButtons">
+            <!-- Dynamically injected from recipes.json -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Voice Recorder & Dropzone -->
+      <div>
+        <div class="section-label">Or Record / Drop Audio File</div>
+        <div class="record-box" id="audioDropzone">
+          <button type="button" class="mic-icon-btn" id="micRecordBtn" title="Click to start/stop recording grandpa's story">
+            🎙️
+          </button>
+          <div style="font-weight: 600; font-size: 0.95rem; color: #fff;" id="micStatusText">
+            Tap mic to record grandpa's kitchen story
+          </div>
+          <div style="font-size: 0.8rem; color: var(--text-muted);">
+            or drag & drop .mp3, .wav, .m4a files here
+          </div>
+          <input type="file" id="audioFileInput" accept="audio/*" style="display: none;">
+        </div>
+      </div>
+
+      <!-- Audio Player & Simulated Waveform -->
+      <div>
+        <div class="section-label">Audio Playback & Analysis</div>
+        <div class="audio-player-bar">
+          <audio id="mainAudioPlayer" controls style="display: block; width: 100%;"></audio>
+        </div>
+        <canvas id="waveformCanvas" class="waveform-canvas" style="margin-top: 0.5rem;"></canvas>
+      </div>
+
+      <!-- Raw Voice Transcript Editor -->
+      <div class="transcription-box">
+        <div class="section-label">2. Colloquial Voice Transcript (Offline Whisper)</div>
+        <textarea id="rawTranscript" class="transcription-textarea" placeholder="Grandpa's rambling audio will appear here in raw text..."></textarea>
+      </div>
+
+      <!-- AI Transform Action -->
+      <div>
+        <button id="extractBtn" class="btn btn-primary" style="width: 100%;">
+          <span>✨</span> Transform Into Recipe
+        </button>
+      </div>
+
+      <!-- Open AI Technology Breakdown Card -->
+      <div class="ai-status-card">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <strong style="color: var(--warm-gold); font-size: 0.85rem;">Local Open-Source Inference</strong>
+          <span style="font-size: 0.75rem; color: #a4b595;">Zero Cloud Calls</span>
+        </div>
+        <p style="font-size: 0.8rem; color: var(--text-muted);">
+          Audio is decoded on your local CPU/GPU using open-weight Whisper & parsed into exact culinary quantities using open-source reasoning models.
+        </p>
+      </div>
+
+    </aside>
+
+    <!-- Right Column: Interactive Vintage Heirloom Recipe Book -->
+    <section class="cookbook-container">
+      
+      <!-- Visual Display Tabs -->
+      <div class="tab-selector">
+        <button class="tab-btn active" id="tabRecipeCard">Artisan Recipe Card</button>
+      </div>
+
+      <!-- Parchment Artisan Recipe Sheet -->
+      <article class="parchment-sheet" id="printableRecipeSheet">
+        
+        <!-- Header -->
+        <header class="card-header-vintage">
+          <div class="title-area">
+            <span class="heirloom-tagline" id="displaySpeaker">Grandpa Joe's Sunday Cabin Beef Goulash</span>
+            <h2 id="displayTitle">Sunday Cabin Beef Goulash</h2>
+            
+            <div class="meta-ribbon">
+              <div class="meta-pill">
+                <span class="label">Tradition</span>
+                <span class="value" id="displayYear">1974 Cabin Tradition</span>
+              </div>
+              <div class="meta-pill">
+                <span class="label">Prep Time</span>
+                <span class="value" id="displayPrep">25 mins</span>
+              </div>
+              <div class="meta-pill">
+                <span class="label">Cook Time</span>
+                <span class="value" id="displayCook">2 hrs 15 mins</span>
+              </div>
+              <div class="meta-pill">
+                <span class="label">Yield</span>
+                <span class="value" id="displayServings">6 hungry people</span>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <!-- Memory Quote / Origin Story -->
+        <div class="grandpa-quote-hero" id="displayHeroQuote">
+          "Listen close, because I won't say this twice. If you want the Sunday beef goulash to taste the way it did at the cabin, you don't touch any canned broth."
+          <cite>— Grandpa Joe</cite>
+        </div>
+
+        <!-- Recipe Content: 2-Column Layout -->
+        <div class="recipe-body-grid">
+          
+          <!-- Ingredients with Folk Conversions -->
+          <div class="ingredients-column">
+            <h3><span>🧂</span> Ingredients & Measures</h3>
+            <ul class="ingredient-list" id="displayIngredients">
+              <!-- Dynamically populated -->
+            </ul>
+          </div>
+
+          <!-- Step-by-Step Cooking Guide -->
+          <div class="instructions-column">
+            <h3><span>🍳</span> Step-by-Step Method</h3>
+            <div class="steps-list" id="displaySteps">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Grandpa's Secret Tip Box -->
+        <div class="secret-box">
+          <div class="secret-badge">Grandpa's Golden Secret</div>
+          <p id="displaySecret">
+            Never bloom paprika over direct flame. Residual heat from the bacon drippings is all you need to wake up the sweet oils without scorching.
+          </p>
+        </div>
+
+      </article>
+
+      <!-- Why Open AI Matters Submission Narrative Section -->
+      <section class="open-ai-manifesto">
+        <div class="manifesto-header">
+          <div style="font-size: 2rem;">🕊️</div>
+          <div>
+            <h2>Why Open-Source AI Matters For Heirloom</h2>
+            <p style="color: var(--text-muted); font-size: 0.95rem;">
+              Built for the Hacktoberfest Hackathon: <em>"Build for a Friend"</em>
+            </p>
+          </div>
+        </div>
+
+        <div class="pillars-grid">
+          
+          <div class="pillar-card">
+            <span class="icon">🔒</span>
+            <h4>Emotional Sovereignty & Privacy</h4>
+            <p>
+              Family voice memos aren't just data; they are vulnerable, irreplaceable memories. Commercial closed-source APIs log voice data on centralized corporate servers. Heirloom runs completely on-device, keeping family jokes, personal stories, and grandma's voice strictly in the home.
+            </p>
+          </div>
+
+          <div class="pillar-card">
+            <span class="icon">🌲</span>
+            <h4>Works Off-Grid in Grandpa's Cabin</h4>
+            <p>
+              Many grandparents live in rural areas, mountain cabins, or farmhouses without reliable broadband internet. Closed cloud APIs instantly fail when offline. Open-weight models (Whisper + Llama) run locally on a laptop without needing a single packet of internet.
+            </p>
+          </div>
+
+          <div class="pillar-card">
+            <span class="icon">📜</span>
+            <h4>Colloquial Dialect Flexibility</h4>
+            <p>
+              Closed APIs enforce strict sanitization and often struggle with informal slang like "two fistfuls of flour" or "until it bubbles like an old creek." Open models allow zero-cost prompt calibration to preserve colloquial folk units without corporate filtering.
+            </p>
+          </div>
+
+          <div class="pillar-card">
+            <span class="icon">♾️</span>
+            <h4>Generational Preservation at $0 Cost</h4>
+            <p>
+              Families shouldn't have to subscribe to monthly tokens to preserve their legacy. Because Heirloom relies on open weights and open web standards, a family recipe book can be printed 10, 20, or 50 years from now without subscription lock-in.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+    </section>
+
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

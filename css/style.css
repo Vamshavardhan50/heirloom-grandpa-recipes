@@ -1,0 +1,795 @@
+/* Heirloom Design System & Rustic Vintage Styling */
+:root {
+  --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-handwriting: 'Caveat', cursive, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Heirloom Color Palette */
+  --bg-primary: #171412;
+  --bg-surface: #201a16;
+  --bg-card: #27211c;
+  --bg-parchment: #f9f4ea;
+  --bg-parchment-subtle: #f1ebd9;
+  --text-parchment: #2c221a;
+  --text-parchment-muted: #6e5e4f;
+  
+  --warm-gold: #e2a850;
+  --warm-amber: #c87d32;
+  --burnt-orange: #d95d39;
+  --deep-burgundy: #6e2025;
+  --copper-border: #4d3a2e;
+  --sage-accent: #78866b;
+  
+  --text-main: #f5efe6;
+  --text-muted: #bdaea1;
+  --text-faint: #796c62;
+  
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-xl: 32px;
+
+  --shadow-warm: 0 16px 36px -10px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(226, 168, 80, 0.12);
+  --shadow-card: 0 10px 25px -5px rgba(0,0,0,0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  --shadow-book: 0 25px 50px -12px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(217, 93, 57, 0.2);
+  
+  --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Reset & Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  line-height: 1.6;
+  min-height: 100vh;
+  background-image: 
+    radial-gradient(ellipse at 15% 10%, rgba(226, 168, 80, 0.07) 0%, transparent 60%),
+    radial-gradient(ellipse at 85% 90%, rgba(217, 93, 57, 0.06) 0%, transparent 50%),
+    repeating-linear-gradient(45deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 16px);
+  overflow-x: hidden;
+}
+
+/* Typography Helpers */
+h1, h2, h3, h4, .font-serif {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.handwritten {
+  font-family: var(--font-handwriting);
+  font-size: 1.4rem;
+  color: var(--warm-gold);
+}
+
+/* App Header & Top Nav */
+.header-banner {
+  border-bottom: 1px solid var(--copper-border);
+  background: rgba(23, 20, 18, 0.88);
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-container {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.brand-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.brand-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--warm-gold), var(--burnt-orange));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 15px rgba(226, 168, 80, 0.35);
+}
+
+.brand-text h1 {
+  font-size: 1.45rem;
+  line-height: 1.1;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.brand-text span.version-tag {
+  font-size: 0.72rem;
+  font-family: var(--font-sans);
+  background: rgba(226, 168, 80, 0.15);
+  color: var(--warm-gold);
+  border: 1px solid rgba(226, 168, 80, 0.3);
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.brand-text p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(120, 134, 107, 0.15);
+  border: 1px solid rgba(120, 134, 107, 0.35);
+  color: #a4b595;
+  font-size: 0.8rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  font-weight: 500;
+}
+
+.pill-badge .indicator {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #50c878;
+  box-shadow: 0 0 8px #50c878;
+  animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.8; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.25); }
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.65rem 1.25rem;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--warm-gold), var(--warm-amber));
+  color: #1a1309;
+  box-shadow: 0 4px 14px rgba(226, 168, 80, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1.5px);
+  box-shadow: 0 6px 20px rgba(226, 168, 80, 0.45);
+  background: linear-gradient(135deg, #eec26f, #d58a3d);
+}
+
+.btn-secondary {
+  background: var(--bg-surface);
+  color: var(--text-main);
+  border-color: var(--copper-border);
+}
+
+.btn-secondary:hover {
+  background: var(--bg-card);
+  border-color: var(--warm-gold);
+  color: #fff;
+}
+
+.btn-accent {
+  background: linear-gradient(135deg, var(--burnt-orange), var(--deep-burgundy));
+  color: #fff;
+}
+
+.btn-accent:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1.5px);
+}
+
+/* Layout Grid */
+.main-wrapper {
+  max-width: 1360px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+  display: grid;
+  grid-template-columns: 460px 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 1060px) {
+  .main-wrapper {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Left Studio Panel */
+.studio-panel {
+  background: var(--bg-surface);
+  border: 1px solid var(--copper-border);
+  border-radius: var(--radius-xl);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-warm);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.panel-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.panel-title h2 {
+  font-size: 1.35rem;
+  color: #fff;
+}
+
+.section-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  color: var(--warm-gold);
+  margin-bottom: 0.5rem;
+}
+
+/* Preset Picker & Audio dropzone */
+.sample-shelf {
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  border: 1px dashed rgba(226, 168, 80, 0.25);
+}
+
+.sample-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-top: 0.5rem;
+}
+
+.sample-chip {
+  text-align: left;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--copper-border);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem;
+  color: var(--text-main);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all var(--transition-fast);
+}
+
+.sample-chip:hover, .sample-chip.active {
+  background: rgba(226, 168, 80, 0.12);
+  border-color: var(--warm-gold);
+  transform: translateX(4px);
+}
+
+.sample-chip strong {
+  display: block;
+  font-size: 0.92rem;
+  color: #fff;
+}
+
+.sample-chip small {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+}
+
+/* Dropzone & Live Mic */
+.record-box {
+  background: var(--bg-card);
+  border: 2px dashed var(--copper-border);
+  border-radius: var(--radius-lg);
+  padding: 1.8rem 1.25rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.record-box:hover {
+  border-color: var(--warm-amber);
+  background: rgba(226, 168, 80, 0.04);
+}
+
+.mic-icon-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(217, 93, 57, 0.15);
+  border: 2px solid var(--burnt-orange);
+  color: var(--burnt-orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.mic-icon-btn.recording {
+  background: var(--burnt-orange);
+  color: #fff;
+  animation: pulse-mic 1s infinite alternate ease-in-out;
+}
+
+@keyframes pulse-mic {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(217, 93, 57, 0.6); }
+  100% { transform: scale(1.1); box-shadow: 0 0 18px 6px rgba(217, 93, 57, 0.4); }
+}
+
+/* Audio Player Bar */
+.audio-player-bar {
+  background: var(--bg-card);
+  border: 1px solid var(--copper-border);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.audio-player-bar audio {
+  width: 100%;
+  height: 36px;
+  filter: invert(0.88) hue-rotate(180deg);
+}
+
+/* Live Waveform Simulation */
+.waveform-canvas {
+  width: 100%;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  background: #14110f;
+  border: 1px solid rgba(226, 168, 80, 0.1);
+}
+
+/* Raw Transcription Editor Box */
+.transcription-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.transcription-textarea {
+  width: 100%;
+  min-height: 140px;
+  background: #14110f;
+  border: 1px solid var(--copper-border);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1rem;
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+.transcription-textarea:focus {
+  outline: none;
+  border-color: var(--warm-gold);
+  box-shadow: 0 0 0 3px rgba(226, 168, 80, 0.15);
+}
+
+/* Open AI Status & Engine Selector */
+.ai-status-card {
+  background: rgba(226, 168, 80, 0.05);
+  border: 1px solid rgba(226, 168, 80, 0.2);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ai-engine-select {
+  background: #191410;
+  border: 1px solid var(--copper-border);
+  border-radius: var(--radius-sm);
+  color: var(--warm-gold);
+  padding: 0.4rem 0.6rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* Right Display: Heirloom Cookbook Experience */
+.cookbook-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.tab-selector {
+  display: flex;
+  gap: 0.5rem;
+  background: var(--bg-surface);
+  padding: 0.35rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--copper-border);
+  width: fit-content;
+}
+
+.tab-btn {
+  padding: 0.55rem 1.25rem;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.tab-btn.active {
+  background: linear-gradient(135deg, var(--warm-gold), var(--warm-amber));
+  color: #1a1309;
+}
+
+/* Parchment Artisan Recipe Card */
+.parchment-sheet {
+  background: var(--bg-parchment);
+  color: var(--text-parchment);
+  border-radius: var(--radius-xl);
+  padding: 3rem 3.5rem;
+  box-shadow: var(--shadow-book);
+  position: relative;
+  background-image: 
+    radial-gradient(ellipse at 95% 5%, rgba(189, 137, 72, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse at 5% 95%, rgba(189, 137, 72, 0.08) 0%, transparent 50%),
+    repeating-linear-gradient(0deg, rgba(74, 52, 33, 0.02) 0px, rgba(74, 52, 33, 0.02) 1px, transparent 1px, transparent 24px);
+  border: 1px solid #e1d3bc;
+}
+
+@media (max-width: 768px) {
+  .parchment-sheet {
+    padding: 1.75rem 1.25rem;
+  }
+}
+
+/* Recipe Card Header */
+.card-header-vintage {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 2px solid #dfcfb8;
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  gap: 1.5rem;
+}
+
+.title-area h2 {
+  font-size: 2.2rem;
+  color: #3b281b;
+  margin-bottom: 0.4rem;
+  line-height: 1.15;
+}
+
+.heirloom-tagline {
+  font-family: var(--font-handwriting);
+  font-size: 1.35rem;
+  color: #9c5520;
+}
+
+.meta-ribbon {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.meta-pill {
+  display: flex;
+  flex-direction: column;
+}
+
+.meta-pill .label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  color: #8c7866;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.meta-pill .value {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #4a3421;
+}
+
+/* Polaroid & Memory Quote Block */
+.grandpa-quote-hero {
+  background: #f1ebd9;
+  border-left: 4px solid var(--burnt-orange);
+  padding: 1.25rem 1.5rem;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  margin-bottom: 2.2rem;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: #49392b;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.03);
+}
+
+.grandpa-quote-hero cite {
+  display: block;
+  margin-top: 0.5rem;
+  font-style: normal;
+  font-family: var(--font-handwriting);
+  font-size: 1.25rem;
+  color: #8b4513;
+  font-weight: bold;
+}
+
+/* 2-Column Ingredients & Instructions */
+.recipe-body-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 2.5rem;
+}
+
+@media (max-width: 900px) {
+  .recipe-body-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.ingredients-column h3, .instructions-column h3 {
+  font-size: 1.3rem;
+  color: #3f2d20;
+  border-bottom: 1.5px solid #d8c7af;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Ingredient items with folk unit badge */
+.ingredient-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.ingredient-item {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px dashed #e6d8c3;
+}
+
+.ingredient-name {
+  font-weight: 600;
+  color: #2b1f16;
+  font-size: 0.95rem;
+}
+
+.folk-amount {
+  font-family: var(--font-handwriting);
+  font-size: 1.15rem;
+  color: #aa5b21;
+}
+
+/* Instructions Steps */
+.steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+}
+
+.step-card {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.step-number {
+  min-width: 32px;
+  height: 32px;
+  background: #3f2d20;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin-top: 0.2rem;
+}
+
+.step-content strong {
+  display: block;
+  font-size: 1.05rem;
+  color: #312115;
+  margin-bottom: 0.2rem;
+}
+
+.step-content p {
+  color: #554435;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.step-audio-quote {
+  margin-top: 0.45rem;
+  font-family: var(--font-handwriting);
+  color: #b3561a;
+  font-size: 1.15rem;
+  display: inline-block;
+  cursor: pointer;
+  background: rgba(226, 168, 80, 0.15);
+  padding: 0.1rem 0.5rem;
+  border-radius: 4px;
+}
+
+.step-audio-quote:hover {
+  background: rgba(226, 168, 80, 0.3);
+}
+
+/* Grandpa's Secret Box */
+.secret-box {
+  margin-top: 2.5rem;
+  background: #fffdf9;
+  border: 2px solid #dfb987;
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(189, 137, 72, 0.1);
+}
+
+.secret-badge {
+  position: absolute;
+  top: -14px;
+  left: 1.5rem;
+  background: linear-gradient(135deg, var(--warm-gold), var(--burnt-orange));
+  color: #fff;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 800;
+  padding: 0.2rem 0.8rem;
+  border-radius: 999px;
+  letter-spacing: 0.05em;
+}
+
+.secret-box p {
+  color: #4a3421;
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+/* Why Open AI Modal / Section */
+.open-ai-manifesto {
+  background: var(--bg-surface);
+  border: 1px solid var(--copper-border);
+  border-radius: var(--radius-xl);
+  padding: 2.5rem;
+  margin-top: 3rem;
+  box-shadow: var(--shadow-warm);
+}
+
+.manifesto-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.manifesto-header h2 {
+  font-size: 1.75rem;
+  color: var(--warm-gold);
+}
+
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.pillar-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(226, 168, 80, 0.15);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+}
+
+.pillar-card .icon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.pillar-card h4 {
+  font-size: 1.15rem;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.pillar-card p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+/* Print Stylesheet for Real Heirloom Recipe Book */
+@media print {
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 11pt;
+  }
+
+  .header-banner, .studio-panel, .tab-selector, .btn, .open-ai-manifesto {
+    display: none !important;
+  }
+
+  .main-wrapper {
+    display: block !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .parchment-sheet {
+    box-shadow: none !important;
+    border: none !important;
+    background: #fff !important;
+    padding: 0 !important;
+  }
+
+  .secret-box {
+    page-break-inside: avoid;
+    border: 1px solid #666 !important;
+  }
+
+  .recipe-body-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1.8fr !important;
+  }
+}
