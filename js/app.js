@@ -234,47 +234,72 @@ function setupEventListeners() {
     });
   }
 
-  // Microphone Record Handler
+  // Live Microphone Speech Recognition + MediaRecorder
   const micBtn = document.getElementById('micRecordBtn');
   const micStatus = document.getElementById('micStatusText');
+  const transcriptArea = document.getElementById('rawTranscript');
+
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  let recognition = null;
+
+  if (SpeechRecognition) {
+    recognition = new SpeechRecognition();
+    recognition.continuous = true;
+    recognition.interimResults = true;
+    recognition.lang = 'en-US';
+
+    recognition.onstart = () => {
+      isRecording = true;
+      micBtn.classList.add('recording');
+      micStatus.textContent = "Listening to Grandpa... (Speak your recipe now!)";
+      playAcousticFeedback('click');
+    };
+
+    recognition.onresult = (event) => {
+      let liveText = '';
+      for (let i = 0; i < event.results.length; i++) {
+        liveText += event.results[i][0].transcript + ' ';
+      }
+      transcriptArea.value = liveText.trim();
+    };
+
+    recognition.onerror = (event) => {
+      console.warn("Speech recognition notice:", event.error);
+      if (event.error === 'not-allowed') {
+        micStatus.textContent = "Microphone blocked. Please grant mic permission in your browser.";
+      }
+    };
+
+    recognition.onend = () => {
+      isRecording = false;
+      micBtn.classList.remove('recording');
+      micStatus.textContent = "Voice captured! Click 'Transform Into Recipe' below.";
+      playAcousticFeedback('success');
+    };
+  }
+
   if (micBtn) {
     micBtn.addEventListener('click', async () => {
       if (!isRecording) {
-        try {
-          const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-          mediaRecorder = new MediaRecorder(stream);
-          audioChunks = [];
-          mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
-          mediaRecorder.onstop = () => {
-            const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
-            const audioUrl = URL.createObjectURL(audioBlob);
-            const player = document.getElementById('mainAudioPlayer');
-            if (player) {
-              player.src = audioUrl;
-              player.style.display = 'block';
-            }
-          };
-
-          mediaRecorder.start();
-          isRecording = true;
-          micBtn.classList.add('recording');
-          micStatus.textContent = "Listening to Grandpa... (Click again to finish)";
-          playAcousticFeedback('click');
-        } catch (err) {
-          // If browser mic permission denied or running in local file without SSL, simulate mic recording
+        if (recognition) {
+          try {
+            transcriptArea.value = '';
+            recognition.start();
+          } catch (e) {
+            simulateMicRecording();
+          }
+        } else {
           simulateMicRecording();
         }
       } else {
-        if (mediaRecorder && mediaRecorder.state !== 'inactive') {
-          mediaRecorder.stop();
+        if (recognition) {
+          recognition.stop();
+        } else {
+          isRecording = false;
+          micBtn.classList.remove('recording');
+          micStatus.textContent = "Voice captured!";
+          playAcousticFeedback('success');
         }
-        isRecording = false;
-        micBtn.classList.remove('recording');
-        micStatus.textContent = "Processing audio with offline Whisper model...";
-        playAcousticFeedback('success');
-        setTimeout(() => {
-          micStatus.textContent = "Voice memo transcribed offline!";
-        }, 800);
       }
     });
   }
